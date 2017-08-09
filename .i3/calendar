@@ -1,0 +1,7 @@
+#!/bin/sh
+echo ""
+if [ "$(pidof gsimplecal)" -ne "0" ]; then
+  pkill gsimplecal
+else
+  gsimplecal&
+fi
