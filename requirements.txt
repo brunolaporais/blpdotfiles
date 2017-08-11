@@ -4,5 +4,6 @@ sudo apt install i3blocks
 sudo apt install gsimplecal
 sudo apt install albert
 sudo apt install classicmenu-indicator
-sudo apt install volumeicon
+sudo apt install pnmixer
+sudo apt install gnome-alsamixer
 sudo apt install nitrogen

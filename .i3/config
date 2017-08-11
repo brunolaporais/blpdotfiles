@@ -150,7 +150,7 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 # Move workspace to other monitor
-bindsym $mod+m move workspace to output left
+bindsym $mod+m move workspace to output up
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
@@ -230,7 +230,7 @@ focus_follows_mouse yes
 
 exec --no-startup-id nitrogen --restore
 exec --no-startup-id nm-applet
-exec --no-startup-id volumeicon
+exec --no-startup-id pnmixer
 exec --no-startup-id classicmenu-indicator
 exec --no-startup-id ibus-daemon
 exec --no-startup-id albert
@@ -241,5 +241,5 @@ exec --no-startup-id xsetroot -solid '#002244'
 exec --no-startup-id setxkbmap -model abnt2 -layout br -variant abnt2
 
 # dual monitor config
-exec xrandr --output DisplayPort-0 --mode 1920x1080 --pos 0x0 --rotate normal --output DVI-0 --mode 1920x1080 --pos 1928x0 --rotate normal
-#exec xrandr --output HDMI1 --auto --above LVDS1 && xrandr --output LVDS1 --pos 276x1080
+#exec xrandr --output DisplayPort-0 --mode 1920x1080 --pos 0x0 --rotate normal --output DVI-0 --mode 1920x1080 --pos 1928x0 --rotate normal
+exec xrandr --output HDMI1 --auto --above LVDS1 && xrandr --output LVDS1 --pos 276x1080
