@@ -1,0 +1,61 @@
+#!/bin/sh
+
+#export Display for output
+export DISPLAY=:0.0
+
+#some scripts for work
+xrandr_command="/usr/bin/xrandr"
+awk_command="/usr/bin/awk"
+
+#output connected
+output=""
+
+#get max  resolution of connected devises
+
+resolution_VGA=`${xrandr_command} | $awk_command '/VGA1 connected/ { getline; print  $1}'`
+
+resolution_HDMI=`${xrandr_command} | $awk_command '/HDMI1 connected/ { getline; print  $1}'`
+
+resolution=""
+
+#if resolution exist we get true
+if [ -n "$resolution_VGA" ]; then
+
+        output="VGA1"
+        resolution=$resolution_VGA
+
+elif [ -n "$resolution_HDMI" ]; then
+
+        output="HDMI1"
+        resolution=$resolution_HDMI
+
+else
+
+        xrandr --auto
+fi
+
+if [ -n "$output" ]; then
+
+        resolution_LVDS=`${xrandr_command} | $awk_command '/LVDS1 connected/ { getline; print $1}'`
+        LVDS_x="${resolution_LVDS%x*}"
+        AUX_x="${resolution%x*}"
+        X_POS=$(($(($AUX_x-$LVDS_x))/2))
+        Y_POS="${resolution#*x}"
+        case "$1" in
+                r)
+                xrandr --output $output --right-of LVDS1 --mode $resolution
+                ;;
+                l)
+                xrandr --output $output --left-of LVDS1 --mode $resolution
+                ;;
+                a)
+                xrandr --output $output --above LVDS1 --mode $resolution
+                xrandr --output LVDS1 --pos $X_POS"x"$Y_POS
+                ;;
+                #TODO: Implements down view
+                s)
+                xrandr --output $output --same-as LVDS1 --mode $resolution
+                ;;
+
+        esac
+fi
