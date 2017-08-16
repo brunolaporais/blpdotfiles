@@ -5,9 +5,17 @@
 #
 # A battery indicator blocklet script for i3blocks
 
-from subprocess import check_output
+from subprocess import check_output, Popen
+import time
+
+current_time = int(round(time.time()))
+default_interval = 30
+notify_interval = 180
 
 status = check_output(['acpi'], universal_newlines=True)
+
+# stands for using battery in notification
+FA_LOW_BATTERY = "<span font='FontAwesome'>\uf244</span>"
 
 if not status:
     # stands for no battery found
@@ -50,6 +58,7 @@ else:
         time = ":".join(time.split(":")[0:2])
         timeleft = " ({})".format(time)
         fulltext = FA_BATTERY + " "
+
     elif state == "Full":
         fulltext = FA_PLUG + " "
     elif state == "Unknown":
@@ -60,6 +69,8 @@ else:
     def color(percent):
         if percent < 10:
             # exit code 33 will turn background red
+            if (current_time % notify_interval) <= default_interval:
+                Popen(['notify-send', FA_LOW_BATTERY + ' Battery: less than 10% left!'])
             return "#FFFFFF"
         if percent < 20:
             return "#FF3300"
