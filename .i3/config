@@ -217,7 +217,7 @@ bindsym $mod+Ctrl+Shift+2 exec dbus-send --print-reply --dest=org.mpris.MediaPla
 bindsym $mod+Ctrl+Shift+3 exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause && killall dunst
 
 # disable mouse focus
-focus_follows_mouse yes
+focus_follows_mouse not
 
 # custom applications
 #bindsym $mod+g exec dbus-launch thunar
