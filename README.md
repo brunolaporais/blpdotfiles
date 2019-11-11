@@ -1,12 +1,14 @@
-# My own dotfiles for i3
+# My own dotfiles
 
-## Bar
+## i3
+
+### Bar
 ![Bar](img/bar.jpg)
 
 CPU, Memory, Swap, IP, Battery, Calendar, Applets.
 
-## Calendar
+### Calendar
 ![Calendar](img/calendar.jpg)
 
-## Applets
+### Applets
 Language, Network Manager, PNMixer (Sound Control), ClassicMenu Indicator
